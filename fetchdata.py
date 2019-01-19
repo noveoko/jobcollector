@@ -15,7 +15,7 @@ def atomToJson():
             street, city = (address[0:-1],address[-1])
         except ValueError as ve:
             print(ve, address)
-        title_company = " ".join([a.text for a in job.find_all("span")if 'https://justjoin.it/feed.atom' in str(a)])
+        title_company = " ".join([a.text for a in job.find_all("span")if a.has_attr('xml:base')])
         if title_company:
             job_title, company_name = [a.strip() for a in title_company.split("@")]
             if company_name in jobs:
@@ -30,6 +30,7 @@ def atomToJson():
         
 
 result = atomToJson()
+
 
 
 
